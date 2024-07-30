@@ -35,6 +35,7 @@ public class App {
             System.out.println(GREEN + "4.- GESTIONAR CARRERAS" + RESET);
             System.out.println(GREEN + "5.- GESTIONAR PROFESORES" + RESET);
             System.out.println(GREEN + "6.- GESTIONAR MATERIAS" + RESET);
+            System.out.println(GREEN + "7.- GESTIONAR UNIDADES" + RESET);
             System.out.println(GREEN + "0.- SALIR" + RESET);
             System.out.print(GREEN + "Ingrese una opción: " + RESET);
             opt = teclado.nextInt();
@@ -48,6 +49,7 @@ public class App {
                 case 4 -> new GestorCarreras().menu();
                 case 5 -> new GestorProfesores().menu();
                 case 6 -> new GestorMaterias().menu();
+                case 7 -> new GestorUnidades().menu();
                 default -> System.out.println("Opción no encontrada");
             }
         } while (opt != 0);
