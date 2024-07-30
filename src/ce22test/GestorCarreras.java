@@ -90,7 +90,7 @@ public class GestorCarreras extends ModeloCarrera{
         this.index();
         
         Scanner teclado = new Scanner(System.in);
-        System.out.print(App.PURPLE + "Ingrese le ID de la " + this.carrera + " a actualizar: ");
+        System.out.print(App.PURPLE + "Ingrese el ID de la " + this.carrera + " a actualizar: ");
         int id = teclado.nextInt();
         teclado.nextLine();
         
@@ -107,7 +107,7 @@ public class GestorCarreras extends ModeloCarrera{
         Carrera carreraActualizada = this.actualizar(id, nombre);
         List<Carrera> listaCiclos = Arrays.asList(carreraActualizada
         );
-        System.out.println("El " + this.nombreSingular + " actualizada es: ");
+        System.out.println("La " + this.nombreSingular + " actualizada es: ");
         System.out.println(AsciiTable.getTable(listaCiclos, Arrays.asList(
                 new Column().header("ID").with(a -> Integer.toString(a.getId())),
                 new Column().header("NOMBRE").with(a -> a.getNombre())
@@ -120,13 +120,13 @@ public class GestorCarreras extends ModeloCarrera{
         this.index();
         
         Scanner teclado = new Scanner(System.in);
-        System.out.print(App.PURPLE + "Ingrese le ID del " + this.nombreSingular + " a eliminar: ");
+        System.out.print(App.PURPLE + "Ingrese el ID de la " + this.nombreSingular + " a eliminar: ");
         int id = teclado.nextInt();
         teclado.nextLine();
         
         if(!this.existe(id)) {
             App.clearConsole();
-            System.out.println("El " + this.nombreSingular + " con el ID " + id + " no existe.");
+            System.out.println("La " + this.nombreSingular + " con el ID " + id + " no existe.");
             App.pauseConsole();
             return;
         }
@@ -136,7 +136,7 @@ public class GestorCarreras extends ModeloCarrera{
         if(correcto) {
             System.out.println( this.nombreSingular + " eliminado correctamente");
         } else {
-            System.out.println("Ocurrio un error al intentar eliminar el " + this.nombreSingular + ".");
+            System.out.println("Ocurrio un error al intentar eliminar la " + this.nombreSingular + ".");
         }
         
         App.pauseConsole();

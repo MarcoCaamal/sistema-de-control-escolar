@@ -15,52 +15,60 @@ import java.util.Scanner;
  *
  * @author marco
  */
-public class GestorCiclos extends ModeloCiclo{
-    
+public class GestorProfesores extends ModeloProfesor {
+
+    private final String nombreMenu = "PROFESORES";
+    private final String nombreSingular = "profesor";
+
     public void menu() {
         Scanner teclado = new Scanner(System.in);
         int opt;
         do {
             App.clearConsole();
-            System.out.println(App.BLUE + "MENU DE CICLOS" + App.RESET);
-            System.out.println(App.BLUE +"1.- CONSULTAR CICLOS" + App.RESET);
-            System.out.println(App.BLUE +"2.- BUSQUEDA POR NOMBRE" + App.RESET);
-            System.out.println(App.BLUE +"3.- CREAR" + App.RESET);
-            System.out.println(App.BLUE +"4.- ACTUALIZAR" + App.RESET);
-            System.out.println(App.BLUE +"5.- ELIMINAR" + App.RESET);
-            System.out.println(App.BLUE +"0.- SALIR" + App.RESET);
+            System.out.println(App.BLUE + "MENU DE " + this.nombreMenu + App.RESET);
+            System.out.println(App.BLUE + "1.- CONSULTAR " + this.nombreMenu + App.RESET);
+            System.out.println(App.BLUE + "2.- BUSQUEDA POR NOMBRE" + App.RESET);
+            System.out.println(App.BLUE + "3.- CREAR" + App.RESET);
+            System.out.println(App.BLUE + "4.- ACTUALIZAR" + App.RESET);
+            System.out.println(App.BLUE + "5.- ELIMINAR" + App.RESET);
+            System.out.println(App.BLUE + "0.- SALIR" + App.RESET);
             System.out.print(App.BLUE + "Ingrese una opcion: " + App.RESET);
             opt = teclado.nextInt();
             teclado.nextLine();
-            
+
             switch (opt) {
-                case 1 -> this.index();
-                case 2 -> this.search();
-                case 3 -> this.create();
-                case 4 -> this.update();
-                case 5  -> this.delete();
+                case 1 ->
+                    this.index();
+                case 2 ->
+                    this.search();
+                case 3 ->
+                    this.create();
+                case 4 ->
+                    this.update();
+                case 5 ->
+                    this.delete();
             }
         } while (opt != 0);
     }
-    
+
     public void index() {
         App.clearConsole();
-        System.out.println(App.PURPLE + "LISTANDO CICLOS...");
-        ArrayList<Ciclo> ciclos = this.consulta();
-        System.out.println(AsciiTable.getTable(ciclos, Arrays.asList(
+        System.out.println(App.PURPLE + "LISTANDO " + this.nombreMenu + "...");
+        ArrayList<Profesor> profesores = this.consulta();
+        System.out.println(AsciiTable.getTable(profesores, Arrays.asList(
                 new Column().header("ID").with(a -> Integer.toString(a.getId())),
                 new Column().header("NOMBRE").with(a -> a.getNombre())
         )));
         App.pauseConsole();
     }
-    
+
     private void search() {
         App.clearConsole();
         Scanner teclado = new Scanner(System.in);
         System.out.print(App.PURPLE + "Ingrese un nombre: ");
         String nombre = teclado.nextLine();
-        ArrayList<Ciclo> ciclos = this.buscar(nombre);
-        System.out.println(AsciiTable.getTable(ciclos, Arrays.asList(
+        ArrayList<Profesor> profesores = this.buscar(nombre);
+        System.out.println(AsciiTable.getTable(profesores, Arrays.asList(
                 new Column().header("ID").with(a -> Integer.toString(a.getId())),
                 new Column().header("NOMBRE").with(a -> a.getNombre())
         )));
@@ -72,73 +80,71 @@ public class GestorCiclos extends ModeloCiclo{
         Scanner teclado = new Scanner(System.in);
         System.out.print(App.PURPLE + "Ingrese un nombre: ");
         String nombre = teclado.nextLine();
-        Ciclo cicloCreado = this.crear(nombre);
-        List<Ciclo> listaCiclos = Arrays.asList(
-                cicloCreado
+        Profesor profesorCreado = this.crear(nombre);
+        List<Profesor> listaProfesores = Arrays.asList(profesorCreado
         );
-        System.out.println("El ciclo creado es: ");
-        System.out.println(AsciiTable.getTable(listaCiclos, Arrays.asList(
+        System.out.println("El " + this.nombreSingular + " creado es: ");
+        System.out.println(AsciiTable.getTable(listaProfesores, Arrays.asList(
                 new Column().header("ID").with(a -> Integer.toString(a.getId())),
                 new Column().header("NOMBRE").with(a -> a.getNombre())
         )));
         App.pauseConsole();
     }
-    
+
     private void update() {
         App.clearConsole();
         this.index();
-        
+
         Scanner teclado = new Scanner(System.in);
-        System.out.print(App.PURPLE + "Ingrese el ID del ciclo a actualizar: ");
+        System.out.print(App.PURPLE + "Ingrese el ID del " + this.nombreSingular + " a actualizar: ");
         int id = teclado.nextInt();
         teclado.nextLine();
-        
-        if(!this.existe(id)) {
+
+        if (!this.existe(id)) {
             App.clearConsole();
-            System.out.println("El ciclo con el ID " + id + " no existe.");
+            System.out.println("El " + this.nombreSingular + " con el ID " + id + " no existe.");
             App.pauseConsole();
             return;
         }
-        
-        System.out.print("Ingrese el nuevo nombre del ciclo: ");
+
+        System.out.print("Ingrese el nuevo nombre del " + this.nombreSingular + ": ");
         String nombre = teclado.nextLine();
-        
-        Ciclo cicloActualizado = this.actualizar(id, nombre);
-        List<Ciclo> listaCiclos = Arrays.asList(
-                cicloActualizado
+
+        Profesor profesorActualizado = this.actualizar(id, nombre);
+        List<Profesor> listaProfesores = Arrays.asList(profesorActualizado
         );
-        System.out.println("El ciclo actualizado es: ");
-        System.out.println(AsciiTable.getTable(listaCiclos, Arrays.asList(
+        System.out.println("El " + this.nombreSingular + " actualizado es: ");
+        System.out.println(AsciiTable.getTable(listaProfesores, Arrays.asList(
                 new Column().header("ID").with(a -> Integer.toString(a.getId())),
                 new Column().header("NOMBRE").with(a -> a.getNombre())
         )));
         App.pauseConsole();
     }
-    
+
     private void delete() {
         App.clearConsole();
         this.index();
-        
+
         Scanner teclado = new Scanner(System.in);
-        System.out.print(App.PURPLE + "Ingrese le ID del ciclo a eliminar: ");
+        System.out.print(App.PURPLE + "Ingrese el ID del " + this.nombreSingular + " a eliminar: ");
         int id = teclado.nextInt();
         teclado.nextLine();
-        
-        if(!this.existe(id)) {
+
+        if (!this.existe(id)) {
             App.clearConsole();
-            System.out.println("El ciclo con el ID " + id + " no existe.");
+            System.out.println("El " + this.nombreSingular + " con el ID " + id + " no existe.");
             App.pauseConsole();
             return;
         }
-        
+
         boolean correcto = this.eliminar(id);
-        
-        if(correcto) {
-            System.out.println("Ciclo eliminado correctamente");
+
+        if (correcto) {
+            System.out.println(this.nombreSingular + " eliminado correctamente");
         } else {
-            System.out.println("Ocurrio un error al intentar eliminar el ciclo.");
+            System.out.println("Ocurrio un error al intentar eliminar el " + this.nombreSingular + ".");
         }
-        
+
         App.pauseConsole();
     }
-} 
+}

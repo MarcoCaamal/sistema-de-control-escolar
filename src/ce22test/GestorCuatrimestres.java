@@ -88,7 +88,7 @@ public class GestorCuatrimestres extends ModeloCuatrimestre {
         this.index();
         
         Scanner teclado = new Scanner(System.in);
-        System.out.print(App.PURPLE + "Ingrese le ID del cuatrimestre a actualizar: ");
+        System.out.print(App.PURPLE + "Ingrese el ID del cuatrimestre a actualizar: ");
         int id = teclado.nextInt();
         teclado.nextLine();
         

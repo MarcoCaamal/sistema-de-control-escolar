@@ -8,16 +8,16 @@ package ce22test;
  *
  * @author marco
  */
-public class Carrera {
+public class Profesor {
     private int id;
     private String nombre;
     
-    public Carrera() {
+    public Profesor() {
         this.id = 0;
         this.nombre = "";
     }
     
-    public Carrera(int id, String nombre) {
+    public Profesor(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
     }
